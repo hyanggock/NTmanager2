@@ -1,0 +1,166 @@
+body{
+  height: 100%;
+  padding: 0%;
+  margin: 0%;
+  -webkit-user-select:none;
+  -moz-user-select:none;
+  -ms-user-select:none;
+  user-select:none
+}
+.header{
+  height:50px; 
+  width: 100%; 
+  position:fixed; 
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+  border:1px solid black;
+  background-color: rgba(255,255,255,0.8);
+  transition: all .3s;
+  backdrop-filter: blur(1px);
+}
+.notecell{
+  width:100%;
+  height:60px;
+  display:flex;
+  align-items:center;
+  justify-content: center;
+}
+.devicenumber{
+  width:40%;
+  height:40px;
+  border:1px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.btns{
+  width:19%;
+  height:40px;
+  border:1px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.btnsgroup{
+  border:1px solid black;
+  width:60%;
+  display:flex;
+}
+.cell_area{
+  display:flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  border:1px solid black;
+}
+
+.sidemenu{
+  animation-timing-function: ease;
+  animation-duration: 0.25s;
+  animation-fill-mode:forwards;
+  height:100%;
+  width:200px;
+  transform: translate(-100%,0%);
+  position:fixed;
+  z-index: 1000;
+  background-color: rgba(255,255,255,0.9);
+  box-shadow: 0px 0px 7px 5px rgba(0,0,0,0.1);
+  backdrop-filter: blur(1px);
+}
+
+.btnsblank{
+  width:1%;
+  height:40px;
+}
+
+.sideTabBtns{
+  height:50px;
+  width: 100%;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+@media all and (min-width: 599px){
+.sidemenu{
+  width:300px;
+}
+}
+@media all and (max-width: 599px){
+  .sidemenu{
+    width:101%;
+    height:101%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+}
+@media all and (max-width: 1800px)
+{
+  .notecell{
+    width: 24%;
+  }
+}
+@media all and (max-width: 1300px)
+{
+  .notecell{
+    width: 32%;
+  }
+}
+@media all and (max-width: 800px)
+{
+  .notecell{
+    width: 49%;
+  }
+}
+@media all and (max-width: 400px)
+{
+  .notecell{
+    width: 100%;
+  }
+}
+@media all and (min-width: 400px)
+{
+  .notecell{
+    width: 100%;
+  }
+}
+@media all and (min-width: 800px)
+{
+  .notecell{
+    width: 49%;
+  }
+}
+@media all and (min-width: 1300px)
+{
+  .notecell{
+    width: 32%;
+  }
+}
+@media all and (min-width: 1800px)
+{
+  .notecell{
+    width: 24%;
+  }
+}
+
+@keyframes open{
+  from{
+    transform:translate(-100%,0%);
+    opacity: 0%;
+  }
+  to{
+    transform:translate(0%,0%);
+    opacity: 100%;
+  }
+}
+@keyframes close{
+  from{
+    transform:translate(0%,0%);
+    opacity: 100%;
+  }
+  to{
+    transform:translate(-100%,0%);
+    opacity: 0%;
+  }
+}
