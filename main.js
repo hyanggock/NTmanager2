@@ -14,35 +14,29 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-var notebooknames=[];
-var menuname=[];
-menuname[0]='대시보드';
-menuname[100]='설정';
+var notebooknames = [];
+var menuname = [];
+menuname[0] = '대시보드';
+menuname[100] = '설정';
 var database = getDatabase(app);
 var currentMenu = 0;
-onValue(ref(database,"/Notebooks"), (snapData) => {
-  if(document.getElementById("loadingpanel").style.display!='none')
-  {
-    document.getElementById("loadingpanel").style.display='none';
+
+onValue(ref(database, "/Notebooks"), (snapData) => {
+  if (document.getElementById("loadingpanel").style.display != 'none') {
+    document.getElementById("loadingpanel").style.display = 'none';
   }
   var len = Object.keys(snapData.val()).length;
   console.log(Object.keys(snapData.val()).length);
   CleanMenu();
-  notebooknames=[];
-  for(var i=0;i<len;i++){
-    notebooknames[i+1]=Object.keys(snapData.val())[i];
-    menuname[i+1]=Object.keys(snapData.val())[i];
+  notebooknames = [];
+  for (var i = 0; i < len; i++) {
+    notebooknames[i + 1] = Object.keys(snapData.val())[i];
+    menuname[i + 1] = Object.keys(snapData.val())[i];
     console.log(Object.keys(snapData.val())[i]);
-    makemenu(Object.keys(snapData.val())[i],i+1);
+    makemenu(Object.keys(snapData.val())[i], i + 1);
   }
-  //for(var i)
-  /*CleanCells();
-  for(var i=1;i<len+1;i++){
-    var tempinfo=snapData.child(i+'/info').val().toString();
-    var tempstatus=snapData.child(i+'/notebookstatus').val().toString();
-    makecell('교육재정-노-',i,tempstatus,tempinfo);
-  }*/
-})
+}
+)
 
 if (currentMenu == 0) {
 
@@ -57,7 +51,7 @@ else {
 
 
 window.changeScene = function (scene) {
-  document.getElementById('title').innerHTML=menuname[scene];
+  document.getElementById('title').innerHTML = menuname[scene];
   if (window.screen.width < 599) {
     sidemenu(false);
   }
@@ -72,23 +66,21 @@ window.changeScene = function (scene) {
   else {
     document.getElementById('cell_area').style.display = 'flex';
     document.getElementById('dashboard').style.display = 'none';
-    document.getElementById("loadingpanel").style.display='flex';
+    document.getElementById("loadingpanel").style.display = 'flex';
 
-    CleanCells(); 
-    onValue(ref(database,"/Notebooks/"+notebooknames[scene]),(snapData)=>{
-      var len=Object.keys(snapData.val()).length;
+    CleanCells();
+    onValue(ref(database, "/Notebooks/" + notebooknames[scene]), (snapData) => {
+      var len = Object.keys(snapData.val()).length;
       document.getElementById('cell_area').classList.remove("cell_area");
       void document.getElementById('cell_area').offsetWidth;
       document.getElementById('cell_area').classList.add("cell_area");
-      for(var i=1;i<=len;i++)
-      {
-        var tempinfo=snapData.child(i+'/info').val().toString();
-        var tempstatus=snapData.child(i+'/notebookstatus').val().toString();
-        makecell(notebooknames[scene],i,tempstatus,tempinfo);
+      for (var i = 1; i <= len; i++) {
+        var tempinfo = snapData.child(i + '/info').val().toString();
+        var tempstatus = snapData.child(i + '/notebookstatus').val().toString();
+        makecell(notebooknames[scene], i, tempstatus, tempinfo);
       }
-      if(document.getElementById("loadingpanel").style.display!='none')
-      {
-        document.getElementById("loadingpanel").style.display='none';
+      if (document.getElementById("loadingpanel").style.display != 'none') {
+        document.getElementById("loadingpanel").style.display = 'none';
       }
     })
   }
@@ -143,7 +135,7 @@ function CleanMenu() {
 
 function makemenu(type, num) {
   document.getElementById('sidemenu').innerHTML += '<div id="sidemenu_' + type +
-    '"class="sideTabBtns" onclick="changeScene('+num+')">'
+    '"class="sideTabBtns" onclick="changeScene(' + num + ')">'
     + type +
     '</div>';
 }
@@ -161,12 +153,11 @@ function makecell(type, number, status, info) {
   statusStyle[4] = 'color: white; background-color: red;';
   statusStyle[5] = 'color: white; background-color: blueviolet;';
   statusStyle[6] = 'background-color:white';
-  var temptext=number;
+  var temptext = number;
 
-  if(type.includes('NB'))
-  {
-    temptext=String(temptext).padStart(4,'0');
-    temptext='-'+temptext;
+  if (type.includes('NB')) {
+    temptext = String(temptext).padStart(4, '0');
+    temptext = '-' + temptext;
   }
 
   document.getElementById('cell_area').innerHTML += '<div class="notecell" id="cell_' + type + '_' + number + '"> ' +
@@ -199,20 +190,6 @@ $(window).scroll(function () {
     lastScrollTop = scrollTop;
   }
 })
-/*$(function () {
-  $('.menubtn').click(function () {
-    if (sidemenuAnimationStatus == 'open') {
-      $('.sidemenu').css('-webkit-animation-name', 'close');
-      sidemenuAnimationStatus = 'close';
-      console.log("animation close running");
-    }
-    else {
-      $('.sidemenu').css('-webkit-animation-name', 'open');
-      sidemenuAnimationStatus = 'open';
-      console.log("animation open running");
-    }
-  })
-})*/
 $('html').click(function (e) {
   if (sidemenuAnimationStatus == 'open') {
     if (!$(e.target).hasClass('sidemenu') && !$(e.target).hasClass('menubtn') && $(e.target).parents('.sidemenu').length < 1) {
