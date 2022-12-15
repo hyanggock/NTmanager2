@@ -25,6 +25,7 @@ body{
 .dashboard{
   display:flex;
   flex-wrap: wrap;
+  align-items: center;
   justify-content: center;
   border:1px solid black;
 }
@@ -70,12 +71,26 @@ body{
   width:60%;
   display:flex;
 }
+.loadingpanel{
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+  opacity: 100%;
+  visibility: visible;
+}
+.loadingpanel_trans{
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+  opacity: 100%;
+  visibility: visible;
+  animation-name:transparent;
+}
 
 .loading{
   animation-duration: 0.8s;
   animation-iteration-count: infinite;
   animation-timing-function: linear;
   animation-name: rotate;
+
 }
 .sidemenu{
   animation-timing-function: ease;
@@ -169,6 +184,17 @@ body{
     width: 24%;
   }
 }
+@keyframes transparent {
+  from{
+    opacity: 100%;
+    visibility: visible;
+  }
+  to{
+    opacity: 0%;
+    visibility: hidden;
+  }
+  
+}
 @keyframes transparentslide{
   from{
     transform: translate(-5%,0%);
@@ -196,7 +222,7 @@ body{
   to{
     transform:translate(0%,0%);
     opacity: 100%;
-    visibility: visible;
+    visibility:visible;
   }
 }
 @keyframes close{
