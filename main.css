@@ -23,7 +23,7 @@ body{
   z-index: 600;
 }
 .dashboard{
-  display:none;
+  display:flex;
   flex-wrap: wrap;
   justify-content: center;
   border:1px solid black;
@@ -32,7 +32,7 @@ body{
   display:flex;
 }
 .cell_area{
-  display:flex;
+  display:none;
   z-index: 100;
   flex-wrap: wrap;
   justify-content: space-around;
@@ -189,22 +189,25 @@ body{
 }
 @keyframes open{
   from{
-    transform:translate(-100%,0%);
+    transform:translate(-10%,0%);
     opacity: 0%;
+    visibility:hidden;
   }
   to{
     transform:translate(0%,0%);
     opacity: 100%;
+    visibility: visible;
   }
 }
 @keyframes close{
   from{
     transform:translate(0%,0%);
     opacity: 100%;
-    
+    visibility:visible;
   }
   to{
-    transform:translate(-100%,0%);
+    transform:translate(-10%,0%);
     opacity: 0%;
+    visibility:hidden;
   }
 }
