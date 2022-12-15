@@ -94,7 +94,7 @@ window.changeScene = function (scene) {
         if (document.getElementById("loadingpanel").style.display != 'none') {
           $('.loadingpanel').css('-webkit-animation-name', 'transparent');
         }
-      })
+      });
       before_scene = scene;
     }
   }
