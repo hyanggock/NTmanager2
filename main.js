@@ -61,6 +61,7 @@ window.changeScene = function (scene) {
   if (scene == 0) {
     document.getElementById('cell_area').style.display = 'none';
     document.getElementById('dashboard').style.display = 'flex';
+    
   }
   else if (scene == 100) {
     document.getElementById('cell_area').style.display = 'none';
@@ -74,8 +75,6 @@ window.changeScene = function (scene) {
       void document.getElementById('loadingpanel').offsetWidth;
       document.getElementById('loadingpanel').classList.add("loadingpanel");
       document.getElementById('loadingpanel').style.animationName = "";
-      document.getElementById('loadingpanel').style.visibility = "visible";
-      document.getElementById('loadingpanel').style.opacity = "100%";
       onValue(child(notebookdata, "/" + notebooknames[scene]), (snapData) => {
         console.debug("onValue running");
 
@@ -94,12 +93,15 @@ window.changeScene = function (scene) {
         if (document.getElementById("loadingpanel").style.display != 'none') {
           $('.loadingpanel').css('-webkit-animation-name', 'transparent');
         }
+        before_scene = scene;
       });
-      before_scene = scene;
     }
   }
 }
-
+window.showload = function()
+{
+  document.getElementById('connectingimage').style.visibility="visible";
+}
 window.getDatas = function (input, number, dataname) {
   var val;
   onValue(ref(database, input + '/' + number), (snapData) => {
@@ -111,6 +113,7 @@ window.getDatas = function (input, number, dataname) {
 
 window.updateNotebookData = function (input, number, vKey, value) {
   const updates = {};
+  console.log("updatestart");
   updates['Notebooks/' + input + '/' + number + '/' + vKey] = value;
   update(ref(database), updates)
     .then(() => {
@@ -119,6 +122,7 @@ window.updateNotebookData = function (input, number, vKey, value) {
     .catch((error) => {
       console.log("update failed : " + error);
     })
+    document.getElementById('connectingimage').style.visibility="hidden";
 }
 
 var sidemenuAnimationStatus = "close";
@@ -184,11 +188,11 @@ function makecell(type, number, status, info) {
   for (var i = 0; i < 5; i++) {
     if (status == dBStatusArr[i]) {
       document.getElementById('group_' + number).innerHTML += '<div class="btns"; style="' + statusStyle[i] + '"' +
-        'onclick="updateNotebookData(`' + notebooknames[currentMenu] + '`,`' + number + '`,`notebookstatus`' + ',`' + dBStatusArr[i] + '`);"' + '>' + statusTextarr[i] + '</div>';
+        'onclick="showload();updateNotebookData(`' + notebooknames[currentMenu] + '`,`' + number + '`,`notebookstatus`' + ',`' + dBStatusArr[i] + '`);"' + '>' + statusTextarr[i] + '</div>';
       document.getElementById('devicenum_' + number).style.cssText = statusStyle[i];
     } else {
       document.getElementById('group_' + number).innerHTML += '<div class="btns"; style="' + statusStyle[6] + '"' +
-        'onclick="updateNotebookData(`' + notebooknames[currentMenu] + '`,`' + number + '`,`notebookstatus`' + ',`' + dBStatusArr[i] + '`);"' + '>' + statusTextarr[i] + '</div>';
+        'onclick="showload();updateNotebookData(`' + notebooknames[currentMenu] + '`,`' + number + '`,`notebookstatus`' + ',`' + dBStatusArr[i] + '`);"' + '>' + statusTextarr[i] + '</div>';
 
     }
     document.getElementById('group_' + number).innerHTML += '<div class="btnsblank"></div>';
