@@ -3,38 +3,51 @@
 <title>
   NTmanager
 </title>
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content='"width=device-width, initial-scale=1, shrink-to-fit=no"'>
   <link rel="stylesheet" href="main.css">
   <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
     crossorigin="anonymous">
-  </script>
+    </script>
 
   <script type="module" src="main.js"></script>
 </head>
 
 <body>
-  <duv id="loadingpanel" class="loadingpanel" style="position:fixed; z-index: 1000; flex-direction: column; display: flex; align-items: center; background-color: rgba(0,0,0,0.3); justify-content: center; width:100%; height:100%">
-    <img class="loading" src="https://cdn-icons-png.flaticon.com/512/7794/7794282.png" alt="loading" height="80px" width="80px">
+  <div id="openingpanel" class="openingpanel">
+    <div style="font-size: xx-large;">NT manager</div>
+    <div>&nbsp;</div>
+    <div id="loadingtext">loading...</div>
+  </div>
+  <div id="loadingpanel" class="loadingpanel"
+    style="position:fixed; z-index: 950; flex-direction: column; display: flex; align-items: center; background-color: rgba(0,0,0,0.3); justify-content: center; width:100%; height:100%">
+    <img class="loading" src="https://cdn-icons-png.flaticon.com/512/7794/7794282.png" alt="loading" height="80px"
+      width="80px">
     <p>데이터 불러오는중..</p>
-  </duv>
-  <div id="header" class="header" >
+  </div>
+  <div id="header" class="header">
     <div style="text-align:center;">
       <h2 id="title">대시보드</h2>
     </div>
-    <div id="menubtn" onclick="sidemenu(true);" style="text-align: center; height:50px; will-change:auto; width: 50px; display: flex; align-items: center; justify-content: center;position: absolute; left:0px; z-index: 900;">
-        <img class="menubtn" src="https://cdn-icons-png.flaticon.com/512/4543/4543046.png" alt="menuimg" width="40px" height="40px">
+    <div id="menubtn" onclick="sidemenu(true);"
+      style="text-align: center; height:50px; will-change:auto; width: 50px; display: flex; align-items: center; justify-content: center;position: absolute; left:0px; z-index: 900;">
+      <img class="menubtn" src="https://cdn-icons-png.flaticon.com/512/4543/4543046.png" alt="menuimg" width="40px"
+        height="40px">
     </div>
-    <div id="connectingimage" style="height: 50px; align-items: cemter; justify-content: center; width:50px; visibility: hidden; position:absolute; right:0px;">
-      <video class="connecticon" src="https://cdn-icons-mp4.flaticon.com/512/6172/6172518.mp4" autoplay="autoplay" 
-      loop="true" type="video/mp4" alt="connectimg" mute="muted" width="50px" height="50px">
-  </div>
+    <div id="connectingimage"
+      style="height: 50px; align-items: cemter; opacity: 0.001; justify-content: center; width:50px; visibility: visible; position:absolute; right:0px;">
+      <video class="connecticon" src="https://cdn-icons-mp4.flaticon.com/512/6172/6172518.mp4" autoplay="autoplay"
+        loop="true" type="video/mp4" alt="connectimg" mute="muted" width="50px" height="50px">
+    </div>
   </div>
   <div id="sidemenu" class="sidemenu">
-    <div id="closeSidemenuBtn" class="menubtn" onclick="sidemenu(false);"  style="background:linear-gradient(to left,rgba(0,0,0,0.5),rgba(0,0,0,0)); display: flex; justify-content:center; align-items:center; width:100%; height:52px;">
-      <img src="https://cdn-icons-png.flaticon.com/512/8928/8928337.png" width="40px" height="40px" style="position: absolute; left: 0px;">
-        <h2>노트북 재고관리</h2>
+    <div id="closeSidemenuBtn" class="menubtn" onclick="sidemenu(false);"
+      style="background:linear-gradient(to left,rgba(0,0,0,0.5),rgba(0,0,0,0)); display: flex; justify-content:center; align-items:center; width:100%; height:52px;">
+      <img src="https://cdn-icons-png.flaticon.com/512/8928/8928337.png" width="40px" height="40px"
+        style="position: absolute; left: 0px;">
+      <h2>노트북 재고관리</h2>
     </div>
     <div id="sidemenu_대시보드" class="sideTabBtns" onclick="changeScene(0)">
       대시보드
@@ -46,33 +59,49 @@
   <div id="emptyspace" style="width:100%; height:50px;">
 
   </div>
+  <div id="settingPanel" class="settingPanel">
+    <div id="emptyspace" style="width:100%; height:10px;">
+
+    </div>
+  </div>
   <div id="dashboard" class="dashboard">
     <div id="emptyspace" style="width:100%; height:10px;">
 
     </div>
     <div id="dashcell_total" class="dashcells_total">
-      <p>전체 사용가능 :</p><p id="total"> 40</p>
+      <p>전체 사용가능 :&nbsp;</p>
+      <p id="total"> 40</p>
     </div>
     <div id="dashcell_notice" class="dashcells_notice">
       <div id="notice_titletext" style="width:100%;"> 공지사항</div>
-      <div id="notice_titleline" style="width:100%; margin-top: 5px; margin-bottom: 5px; height:2px; background: linear-gradient(to right,rgba(0,0,0,1),rgba(0,0,0,0))"></div>
+      <div id="notice_titleline"
+        style="width:100%; margin-top: 5px; margin-bottom: 5px; height:2px; background: linear-gradient(to right,rgba(0,0,0,1),rgba(0,0,0,0))">
+      </div>
       <div id="notice_content" style="width:100%;"> 공지사항 내용</div>
     </div>
-    <div id="dashcell_교육재정-노-" class="dashcells_notebook">
-      교육재정-노-
-    </div>
-    <div id="dashcell_지식정보-노-" class="dashcells_notebook">
-      지식정보-노-
-    </div>
-    <div id="dashcell_NB2104" class="dashcells_notebook">
-      NB2104
-    </div>
-    <div id="dashcell_NB2203" class="dashcells_notebook">
-      NB2203
+    <div id="dashcellarea" class="dashcellarea">
+      <div id="dashcell_교육재정-노-" class="dashcells_notebook" onclick="changeScene(1)">
+        <div style="height:5%; position: absolute; top:5px;"></div>
+        <div style="font-size:larger;">교육재정-노-</div>
+        <div style="display: flex; align-items: center;">
+          <div class="cell_available">21</div>
+          <div>/</div>
+          <div class="cell_total">43</div>
+        </div>
+      </div>
+      <div id="dashcell_지식정보-노-" class="dashcells_notebook">
+        지식정보-노-
+      </div>
+      <div id="dashcell_NB2104" class="dashcells_notebook">
+        NB2104
+      </div>
+      <div id="dashcell_NB2203" class="dashcells_notebook">
+        NB2203
+      </div>
     </div>
   </div>
   <div id="cell_area" class="cell_area">
-    
+
   </div>
 </body>
 
