@@ -29,8 +29,7 @@ Initialize();
 function Initialize() {
   onValue((notebookdata), (snapData) => {
     menulen = Object.keys(snapData.val()).length;
-    console.log('menulen:' + Object.keys(snapData.val()).length);
-      getmenu(snapData);
+    getmenu(snapData);
   });
 }
 function wait(sec) {
@@ -42,31 +41,28 @@ function wait(sec) {
 function getmenu(data) {
   CleanMenu();
   CleanDashCells();
-  var totalStandby=0;
+  var totalStandby = 0;
   notebooknames = [];
   for (var i = 0; i < menulen; i++) {
-    var standbynum=0;
+    var standbynum = 0;
     notebooknames[i + 1] = Object.keys(data.val())[i];
     menuname[i + 1] = Object.keys(data.val())[i];
-    console.log("value : "+data.child(notebooknames[i+1]).val().length);
-    for(var j=1;j<data.child(notebooknames[i+1]).val().length;j++)
-    {
-      console.log(data.child(notebooknames[i+1]+'/'+j+'/notebookstatus').val().toString());
-      if(data.child(notebooknames[i+1]+'/'+j+'/notebookstatus').val().toString()=='standby'){
-        standbynum=standbynum+1;
+    for (var j = 1; j < data.child(notebooknames[i + 1]).val().length; j++) {
+      if (data.child(notebooknames[i + 1] + '/' + j + '/notebookstatus').val().toString() == 'standby') {
+        standbynum = standbynum + 1;
       }
     }
-    totalStandby+=standbynum;
+    totalStandby += standbynum;
     makemenu(Object.keys(data.val())[i], i + 1);
-    makedashcell(notebooknames[i+1],i+1,standbynum,data.child(notebooknames[i+1]).val().length);
+    makedashcell(notebooknames[i + 1], i + 1, standbynum, data.child(notebooknames[i + 1]).val().length);
   }
-  document.getElementById("total").innerHTML=totalStandby;
+  document.getElementById("total").innerHTML = totalStandby;
   if (document.getElementById("loadingpanel").style.display != 'none') {
     $('.loadingpanel').css('-webkit-animation-name', 'transparent');
     $('.openingpanel').css('-webkit-animation-name', 'translatetoupside');
     $('.openingloading').css('-webkit-animation-name', 'transparent');
     $('.openingtext').css('-webkit-animation-name', 'translatetodownsidelittle');
-    document.getElementById('loadingtext').innerHTML="<br>완료";
+    document.getElementById('loadingtext').innerHTML = "<br>완료";
     $('.loadingtext').css('-webkit-animation-name', 'transparent');
   }
 }
@@ -98,12 +94,7 @@ window.changeScene = function (scene) {
     document.getElementById('dashboard').style.display = 'none';
     document.getElementById('settingPanel').style.display = 'none';
     if (before_scene != scene) {
-      document.getElementById('loadingpanel').classList.remove("loadingpanel");
-      void document.getElementById('loadingpanel').offsetWidth;
-      document.getElementById('loadingpanel').classList.add("loadingpanel");
-      document.getElementById('loadingpanel').style.animationName = "";
       onValue(child(notebookdata, "/" + notebooknames[scene]), (snapData) => {
-        document.getElementById('connectingimage').style.opacity = 1;
         var len = Object.keys(snapData.val()).length;
         CleanCells();
         for (var i = 1; i <= len; i++) {
@@ -119,8 +110,7 @@ window.changeScene = function (scene) {
         if (document.getElementById("loadingpanel").style.display != 'none') {
           $('.loadingpanel').css('-webkit-animation-name', 'transparent');
         }
-        console.debug("onValue run end");
-        document.getElementById('connectingimage').style.opacity = 0.001;
+
         before_scene = scene;
       });
     }
@@ -132,7 +122,6 @@ window.showload = function () {
 window.getDatas = function (input, number, dataname) {
   var val;
   onValue(ref(database, input + '/' + number), (snapData) => {
-    console.log(snapData.child(dataname).val().toString());
     val = snapData.child(dataname).val().toString();
   })
   return val;
@@ -140,7 +129,9 @@ window.getDatas = function (input, number, dataname) {
 window.updateNotebookData = function (input, number, vKey, value) {
   const updates = {};
   console.log("updatestart");
-
+  document.getElementById('connectingimage').classList.remove("connection");
+  void document.getElementById('connectingimage').offsetWidth;
+  document.getElementById('connectingimage').classList.add("connection");
   updates['Notebooks/' + input + '/' + number + '/' + vKey] = value;
   update(ref(database), updates)
     .then(() => {
@@ -262,11 +253,9 @@ window.sidemenu = function (input) {
   if (input == false) {
     $('.sidemenu').css('-webkit-animation-name', 'close');
     sidemenuAnimationStatus = 'close';
-    console.log("animation close running");
   }
   else {
     $('.sidemenu').css('-webkit-animation-name', 'open');
     sidemenuAnimationStatus = 'open';
-    console.log("animation open running");
   }
 }
