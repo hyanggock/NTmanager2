@@ -64,7 +64,10 @@ function getmenu(data) {
   if (document.getElementById("loadingpanel").style.display != 'none') {
     $('.loadingpanel').css('-webkit-animation-name', 'transparent');
     $('.openingpanel').css('-webkit-animation-name', 'translatetoupside');
-    document.getElementById("loadingtext").innerHTML="&nbsp;";
+    $('.openingloading').css('-webkit-animation-name', 'transparent');
+    $('.openingtext').css('-webkit-animation-name', 'translatetodownsidelittle');
+    document.getElementById('loadingtext').innerHTML="<br>완료";
+    $('.loadingtext').css('-webkit-animation-name', 'transparent');
   }
 }
 window.changeScene = function (scene) {
