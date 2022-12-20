@@ -32,8 +32,7 @@ body {
   animation-fill-mode: forwards;
 }
 
-.loadingtext
-{
+.loadingtext {
   font-family: 'Open Sans', sans-serif;
   animation-duration: 0.5s;
   animation-timing-function: ease-out;
@@ -92,6 +91,7 @@ body {
   border: 1px solid black;
   margin-top: 5px;
   margin-bottom: 5px;
+  border-radius: 10px;
 }
 
 .dashcells_notice {
@@ -104,8 +104,16 @@ body {
   border: 1px solid black;
   margin-top: 5px;
   margin-bottom: 5px;
+  border-radius: 10px;
+  
 }
-
+.connection{
+  opacity: 100%;
+  animation-duration: 0.5s;
+  animation-timing-function: ease;
+  animation-fill-mode: forwards;
+  animation-name:transparent;
+}
 .dashcells_notebook {
   height: 100px;
   width: 48%;
@@ -116,6 +124,7 @@ body {
   border: 1px solid black;
   margin-top: 5px;
   margin-bottom: 5px;
+  border-radius: 10px;
 }
 
 .dashcells {
@@ -167,14 +176,13 @@ body {
 .btns {
   width: 19%;
   height: 40px;
-  border: 1px solid black;
+  border-radius: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .btnsgroup {
-  border: 1px solid black;
   width: 60%;
   display: flex;
 }
@@ -231,6 +239,10 @@ body {
   text-align: center;
   justify-content: center;
   align-items: center;
+  transition: .3s;
+}
+.sideTabBtns:hover{
+  background-color: rgba(120,120,120, 0.3);
 }
 
 @media all and (min-width: 599px) {
