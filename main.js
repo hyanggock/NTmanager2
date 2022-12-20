@@ -30,28 +30,43 @@ function Initialize() {
   onValue((notebookdata), (snapData) => {
     menulen = Object.keys(snapData.val()).length;
     console.log('menulen:' + Object.keys(snapData.val()).length);
-    if (menuloadrequest == true) {
       getmenu(snapData);
-    }
-  }, { onlyOnce: true });
+  });
 }
-
+function wait(sec) {
+  let start = Date.now(), now = start;
+  while (now - start < sec * 1000) {
+    now = Date.now();
+  }
+}
 function getmenu(data) {
   CleanMenu();
+  CleanDashCells();
+  var totalStandby=0;
   notebooknames = [];
   for (var i = 0; i < menulen; i++) {
+    var standbynum=0;
     notebooknames[i + 1] = Object.keys(data.val())[i];
     menuname[i + 1] = Object.keys(data.val())[i];
-    console.log(Object.keys(data.val())[i]);
+    console.log("value : "+data.child(notebooknames[i+1]).val().length);
+    for(var j=1;j<data.child(notebooknames[i+1]).val().length;j++)
+    {
+      console.log(data.child(notebooknames[i+1]+'/'+j+'/notebookstatus').val().toString());
+      if(data.child(notebooknames[i+1]+'/'+j+'/notebookstatus').val().toString()=='standby'){
+        standbynum=standbynum+1;
+      }
+    }
+    totalStandby+=standbynum;
     makemenu(Object.keys(data.val())[i], i + 1);
+    makedashcell(notebooknames[i+1],i+1,standbynum,data.child(notebooknames[i+1]).val().length);
   }
+  document.getElementById("total").innerHTML=totalStandby;
   if (document.getElementById("loadingpanel").style.display != 'none') {
     $('.loadingpanel').css('-webkit-animation-name', 'transparent');
+    $('.openingpanel').css('-webkit-animation-name', 'translatetoupside');
+    document.getElementById("loadingtext").innerHTML="&nbsp;";
   }
-  menuloadrequest = false;
 }
-
-
 window.changeScene = function (scene) {
   currentMenu = scene;
   document.getElementById('title').innerHTML = menuname[scene];
@@ -61,23 +76,31 @@ window.changeScene = function (scene) {
   if (scene == 0) {
     document.getElementById('cell_area').style.display = 'none';
     document.getElementById('dashboard').style.display = 'flex';
-    
+    document.getElementById('settingPanel').style.display = 'none';
+    document.getElementById('dashboard').classList.remove("loadingpanel");
+    void document.getElementById('dashboard').offsetWidth;
+    document.getElementById('dashboard').classList.add("loadingpanel");
+    document.getElementById('dashboard').style.animationName = "";
+    if (document.getElementById("dashboard").style.display != 'none') {
+      $('.dashboard').css('-webkit-animation-name', 'transparentslide');
+    }
   }
   else if (scene == 100) {
     document.getElementById('cell_area').style.display = 'none';
     document.getElementById('dashboard').style.display = 'none';
+    document.getElementById('settingPanel').style.display = 'flex';
   }
   else {
     document.getElementById('cell_area').style.display = 'flex';
     document.getElementById('dashboard').style.display = 'none';
+    document.getElementById('settingPanel').style.display = 'none';
     if (before_scene != scene) {
       document.getElementById('loadingpanel').classList.remove("loadingpanel");
       void document.getElementById('loadingpanel').offsetWidth;
       document.getElementById('loadingpanel').classList.add("loadingpanel");
       document.getElementById('loadingpanel').style.animationName = "";
       onValue(child(notebookdata, "/" + notebooknames[scene]), (snapData) => {
-        console.debug("onValue running");
-
+        document.getElementById('connectingimage').style.opacity = 1;
         var len = Object.keys(snapData.val()).length;
         CleanCells();
         for (var i = 1; i <= len; i++) {
@@ -93,14 +116,15 @@ window.changeScene = function (scene) {
         if (document.getElementById("loadingpanel").style.display != 'none') {
           $('.loadingpanel').css('-webkit-animation-name', 'transparent');
         }
+        console.debug("onValue run end");
+        document.getElementById('connectingimage').style.opacity = 0.001;
         before_scene = scene;
       });
     }
   }
 }
-window.showload = function()
-{
-  document.getElementById('connectingimage').style.visibility="visible";
+window.showload = function () {
+
 }
 window.getDatas = function (input, number, dataname) {
   var val;
@@ -110,10 +134,10 @@ window.getDatas = function (input, number, dataname) {
   })
   return val;
 }
-
 window.updateNotebookData = function (input, number, vKey, value) {
   const updates = {};
   console.log("updatestart");
+
   updates['Notebooks/' + input + '/' + number + '/' + vKey] = value;
   update(ref(database), updates)
     .then(() => {
@@ -122,12 +146,8 @@ window.updateNotebookData = function (input, number, vKey, value) {
     .catch((error) => {
       console.log("update failed : " + error);
     })
-    document.getElementById('connectingimage').style.visibility="hidden";
 }
-
 var sidemenuAnimationStatus = "close";
-
-
 window.changeElementShowStatusById = function (id, value) {
   if (document.getElementById(id).style.display == "none") {
     document.getElementById(id).style.display = value;
@@ -140,7 +160,6 @@ window.changeElementShowStatusById = function (id, value) {
 function CleanCells() {
   document.getElementById('cell_area').innerHTML = '';
 }
-
 function CleanMenu() {
   document.getElementById('sidemenu').innerHTML = `<div id="closeSidemenuBtn" class="menubtn" onclick="sidemenu(false);"  style="background:linear-gradient(to left,rgba(0,0,0,0.5),rgba(0,0,0,0)); display: flex; justify-content:center; align-items:center; width:100%; height:52px;">
   <img src="https://cdn-icons-png.flaticon.com/512/8928/8928337.png" width="40px" height="40px" style="position: absolute; left: 0px;">
@@ -149,18 +168,19 @@ function CleanMenu() {
 <div id="sidemenu_대시보드" class="sideTabBtns" onclick="changeScene(0);">
   대시보드
 </div>
-<div id="sidemenu_설정" class="sideTabBtns" style="position: absolute; bottom:0px">
+<div id="sidemenu_설정" class="sideTabBtns" style="position: absolute; bottom:0px" onclick="changeScene(100);">
       설정
     </div>`;
 }
-
+function CleanDashCells() {
+  document.getElementById("dashcellarea").innerHTML = "";
+}
 function makemenu(type, num) {
   document.getElementById('sidemenu').innerHTML += '<div id="sidemenu_' + type +
     '"class="sideTabBtns" onclick="changeScene(' + num + ')">'
     + type +
     '</div>';
 }
-
 function makecell(type, number, status, info) {
   var statusTextarr = [];
   statusTextarr[0] = '준비'; statusTextarr[1] = '작업'; statusTextarr[2] = '대여'; statusTextarr[3] = '예약'; statusTextarr[4] = '수리';
@@ -199,6 +219,18 @@ function makecell(type, number, status, info) {
   }
   document.getElementById('cell_area').innerHTML += '</div>';
 
+}
+function makedashcell(type, num, available, total) {
+  document.getElementById("dashcellarea").innerHTML += `
+  <div id="dashcell_`+ type + `" class="dashcells_notebook" onclick="changeScene(` + num + `)">
+        <div style="height:5%; position: absolute; top:5px;"></div>
+        <div style="font-size:larger;">`+ type + `</div>
+        <div style="display: flex; align-items: center;">
+          <div class="cell_available">`+ available + `</div>
+          <div>/</div>
+          <div class="cell_total">`+ total + `</div>
+        </div>
+      </div>`;
 }
 
 
