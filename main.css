@@ -1,148 +1,207 @@
-body{
+body {
   height: 100%;
   padding: 0%;
   margin: 0%;
-  -webkit-user-select:none;
-  -moz-user-select:none;
-  -ms-user-select:none;
-  user-select:none;
-  overflow-y:scroll;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  overflow-y: scroll;
 }
-.header{
-  height: 50px; 
-  width: 100%; 
-  position:fixed; 
-  display: flex; 
-  justify-content: center; 
-  align-items: center; 
-  border:1px solid transparent;
-  box-shadow: 0px 0px 5px 3px rgba(0,0,0,0.3);
-  background-color: rgba(255,255,255,1);
+
+.header {
+  height: 50px;
+  width: 100%;
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid transparent;
+  box-shadow: 0px 0px 5px 3px rgba(0, 0, 0, 0.3);
+  background-color: rgba(255, 255, 255, 1);
   transition: all .3s;
   backdrop-filter: blur(1px);
   z-index: 600;
 }
-.dashboard{
-  display:flex;
+
+.openingpanel {
+  display: flex;
+  position: fixed;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  background-color: white;
+  flex-direction: column;
+  animation-duration: 1s;
+  animation-timing-function: ease-in;
+  animation-fill-mode: forwards;
+}
+
+.settingPanel {
+  display: hidden;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-around;
+  animation-duration: 0.3s;
+  animation-timing-function: ease;
+  animation-fill-mode: forwards;
+  animation-name: transparentslide;
 }
-.dashcells_total{
-  height:150px;
-  width:49%;
+
+.dashboard {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
+  animation-duration: 0.3s;
+  animation-timing-function: ease;
+  animation-fill-mode: forwards;
+  animation-name: transparentslide;
+}
+
+.dashcells_total {
+  height: 150px;
+  width: 49%;
   display: flex;
   align-items: center;
   justify-content: center;
   border: 1px solid black;
-  margin-top:5px;
+  margin-top: 5px;
   margin-bottom: 5px;
 }
-.dashcells_notice{
-  height:150px;
-  width:calc(48%-10px);
+
+.dashcells_notice {
+  height: 150px;
+  width: calc(48%-10px);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
   border: 1px solid black;
-  margin-top:5px;
+  margin-top: 5px;
   margin-bottom: 5px;
 }
-.dashcells_notebook{
-  height:100px;
-  width:48%;
+
+.dashcells_notebook {
+  height: 100px;
+  width: 48%;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
   border: 1px solid black;
-  margin-top:5px;
+  margin-top: 5px;
   margin-bottom: 5px;
 }
-.dashcells{
-  display:flex;
+
+.dashcells {
+  display: flex;
 }
-.cell_area{
-  display:none;
+
+.dashcellarea {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
+
+}
+
+.cell_area {
+  display: none;
   z-index: 100;
   flex-wrap: wrap;
   justify-content: space-around;
   animation-duration: 0.3s;
   animation-timing-function: ease;
   animation-fill-mode: forwards;
-  animation-name:transparentslide;
-}
-.notecell{
-  width:100%;
-  height:60px;
-  display:flex;
-  align-items:center;
-  justify-content: center;
-}
-.devicenumber{
-  width:40%;
-  height:40px;
-  border:1px solid black;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.btns{
-  width:19%;
-  height:40px;
-  border:1px solid black;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.btnsgroup{
-  border:1px solid black;
-  width:60%;
-  display:flex;
-}
-.loadingpanel{
-  animation-duration: 0.5s;
-  animation-fill-mode: forwards;
-  opacity: 100%;
-  visibility: visible;
-}
-.loadingpanel_trans{
-  animation-duration: 0.5s;
-  animation-fill-mode: forwards;
-  opacity: 100%;
-  visibility: visible;
-  animation-name:transparent;
+  animation-name: transparentslide;
 }
 
-.loading{
+.cell_available {
+  font-size: x-large;
+  font-weight: bold;
+}
+
+.notecell {
+  width: 100%;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.devicenumber {
+  width: 40%;
+  height: 40px;
+  border: 1px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btns {
+  width: 19%;
+  height: 40px;
+  border: 1px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btnsgroup {
+  border: 1px solid black;
+  width: 60%;
+  display: flex;
+}
+
+.loadingpanel {
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+  opacity: 100%;
+  visibility: visible;
+}
+
+.loadingpanel_trans {
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+  opacity: 100%;
+  visibility: visible;
+  animation-name: transparent;
+}
+
+.loading {
   animation-duration: 0.8s;
   animation-iteration-count: infinite;
   animation-timing-function: linear;
   animation-name: rotate;
 
 }
-.sidemenu{
+
+.sidemenu {
   animation-timing-function: ease;
   animation-duration: 0.25s;
-  animation-fill-mode:forwards;
-  height:100%;
-  width:200px;
-  transform: translate(-100%,0%);
-  position:fixed;
+  animation-fill-mode: forwards;
+  height: 100%;
+  width: 200px;
+  transform: translate(-100%, 0%);
+  position: fixed;
   z-index: 1000;
   opacity: 0%;
-  background-color: rgba(255,255,255,0.9);
-  box-shadow: 0px 0px 7px 5px rgba(0,0,0,0.1);
+  background-color: rgba(255, 255, 255, 0.9);
+  box-shadow: 0px 0px 7px 5px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(1px);
 }
 
-.btnsblank{
-  width:1%;
-  height:40px;
+.btnsblank {
+  width: 1%;
+  height: 40px;
 }
 
-.sideTabBtns{
-  height:50px;
+.sideTabBtns {
+  height: 50px;
   width: 100%;
   font-size: 20px;
   font-weight: bold;
@@ -151,156 +210,190 @@ body{
   justify-content: center;
   align-items: center;
 }
-@media all and (min-width: 599px){
-.sidemenu{
-  width:300px;
+
+@media all and (min-width: 599px) {
+  .sidemenu {
+    width: 300px;
+  }
 }
-}
-@media all and (max-width: 599px){
-  .sidemenu{
-    width:101%;
-    height:101%;
+
+@media all and (max-width: 599px) {
+  .sidemenu {
+    width: 101%;
+    height: 101%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
   }
 }
-@media all and (max-width: 1800px)
-{
-  .notecell{
+
+@media all and (max-width: 1800px) {
+  .notecell {
     width: 24%;
   }
-  .dashcells_notebook{
+
+  .dashcells_notebook {
     width: 24%;
   }
 }
-@media all and (max-width: 1300px)
-{
-  .notecell{
+
+@media all and (max-width: 1300px) {
+  .notecell {
     width: 32%;
   }
-  .dashcells_notebook{
+
+  .dashcells_notebook {
     width: 24%;
   }
 }
-@media all and (max-width: 800px)
-{
-  .notecell{
+
+@media all and (max-width: 800px) {
+  .notecell {
     width: 48%;
   }
-  .dashcells_notebook{
-    width: 33%;
+
+  .dashcells_notebook {
+    width: 32%;
   }
-  .dashcells_total{
-    width:98%;
+
+  .dashcells_total {
+    width: 98%;
   }
-  .dashcells_notice{
-    width:98%;
+
+  .dashcells_notice {
+    width: 98%;
   }
 }
-@media all and (max-width: 400px)
-{
-  .notecell{
+
+@media all and (max-width: 400px) {
+  .notecell {
     width: 100%;
   }
-  .dashcells_notebook{
+
+  .dashcells_notebook {
     width: 48%;
   }
 
 }
-@media all and (min-width: 400px)
-{
-  .notecell{
+
+@media all and (min-width: 400px) {
+  .notecell {
     width: 100%;
   }
-  .dashcells_notebook{
+
+  .dashcells_notebook {
     width: 48%;
   }
 
 }
-@media all and (min-width: 800px)
-{
-  .notecell{
+
+@media all and (min-width: 800px) {
+  .notecell {
     width: 48%;
   }
-  .dashcells_notebook{
-    width: 33%;
-  }
-  .dashcells_total{
-    width:48%;
-  }
-  .dashcells_notice{
-    width:48%;
-  }
-}
-@media all and (min-width: 1300px)
-{
-  .notecell{
+
+  .dashcells_notebook {
     width: 32%;
   }
-  .dashcells_notebook{
+
+  .dashcells_total {
+    width: 48%;
+  }
+
+  .dashcells_notice {
+    width: 48%;
+  }
+}
+
+@media all and (min-width: 1300px) {
+  .notecell {
+    width: 32%;
+  }
+
+  .dashcells_notebook {
     width: 24%;
   }
 }
-@media all and (min-width: 1800px)
-{
-  .notecell{
+
+@media all and (min-width: 1800px) {
+  .notecell {
     width: 24%;
   }
-  .dashcells_notebook{
+
+  .dashcells_notebook {
     width: 24%;
   }
 }
+
 @keyframes transparent {
-  from{
+  from {
     opacity: 100%;
     visibility: visible;
   }
-  to{
+
+  to {
     opacity: 0%;
     visibility: hidden;
   }
-  
+
 }
-@keyframes transparentslide{
-  from{
-    transform: translate(-5%,0%);
+
+@keyframes transparentslide {
+  from {
+    transform: translate(-5%, 0%);
     opacity: 0%;
   }
-  to{
-    transform: translate(0%,0%);
+
+  to {
+    transform: translate(0%, 0%);
     opacity: 100%;
   }
 }
-@keyframes rotate{
-  from{
+
+@keyframes rotate {
+  from {
     transform: rotate(0turn);
   }
-  to{
+
+  to {
     transform: rotate(1turn);
   }
 }
-@keyframes open{
-  from{
-    transform:translate(-10%,0%);
-    opacity: 0%;
-    visibility:hidden;
+
+@keyframes translatetoupside {
+  from {
+    transform: translate(0%, 0%);
   }
-  to{
-    transform:translate(0%,0%);
-    opacity: 100%;
-    visibility:visible;
+
+  to {
+    transform: translate(0%, -100%);
   }
 }
-@keyframes close{
-  from{
-    transform:translate(0%,0%);
-    opacity: 100%;
-    visibility:visible;
-  }
-  to{
-    transform:translate(-10%,0%);
+
+@keyframes open {
+  from {
+    transform: translate(-10%, 0%);
     opacity: 0%;
-    visibility:hidden;
+    visibility: hidden;
+  }
+
+  to {
+    transform: translate(0%, 0%);
+    opacity: 100%;
+    visibility: visible;
+  }
+}
+
+@keyframes close {
+  from {
+    transform: translate(0%, 0%);
+    opacity: 100%;
+    visibility: visible;
+  }
+
+  to {
+    transform: translate(-10%, 0%);
+    opacity: 0%;
+    visibility: hidden;
   }
 }
