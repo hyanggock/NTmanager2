@@ -24,6 +24,22 @@ body {
   z-index: 600;
 }
 
+.openingtext {
+  font-size: xx-large;
+  font-family: 'Open Sans', sans-serif;
+  animation-duration: 1s;
+  animation-timing-function: ease-out;
+  animation-fill-mode: forwards;
+}
+
+.loadingtext
+{
+  font-family: 'Open Sans', sans-serif;
+  animation-duration: 0.5s;
+  animation-timing-function: ease-out;
+  animation-fill-mode: forwards;
+}
+
 .openingpanel {
   display: flex;
   position: fixed;
@@ -34,7 +50,13 @@ body {
   z-index: 1000;
   background-color: white;
   flex-direction: column;
-  animation-duration: 1s;
+  animation-duration: 1.8s;
+  animation-timing-function: ease-in;
+  animation-fill-mode: forwards;
+}
+
+.openingloading {
+  animation-duration: 0.5s;
   animation-timing-function: ease-in;
   animation-fill-mode: forwards;
 }
@@ -361,13 +383,33 @@ body {
 }
 
 @keyframes translatetoupside {
+  0% {
+    background-color: white;
+  }
+
+  45% {
+    background-color: rgb(127, 255, 214);
+  }
+
+  55% {
+    transform: translate(0%, 0%);
+  }
+
+  100% {
+    transform: translate(0%, -100%);
+    background-color: rgb(127, 255, 214);
+  }
+}
+
+@keyframes translatetodownsidelittle {
   from {
     transform: translate(0%, 0%);
   }
 
   to {
-    transform: translate(0%, -100%);
+    transform: translate(0%, 50%);
   }
+
 }
 
 @keyframes open {
@@ -397,3 +439,5 @@ body {
     visibility: hidden;
   }
 }
+
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
