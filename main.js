@@ -98,7 +98,7 @@ window.changeScene = function (scene) {
         var len = Object.keys(snapData.val()).length;
         CleanCells();
         for (var i = 1; i <= len; i++) {
-          var tempinfo = snapData.child(i + '/info').val().toString();
+          var tempinfo = snapData.chilFd(i + '/info').val().toString();
           var tempstatus = snapData.child(i + '/notebookstatus').val().toString();
           makecell(notebooknames[scene], i, tempstatus, tempinfo);
         }
@@ -152,7 +152,7 @@ window.changeElementShowStatusById = function (id, value) {
   console.log("element edited");
 }
 function CleanCells() {
-  document.getElementById('cell_area').innerHTML = '';
+  document.getElementById('cell_area').innerHTML = `<div id="emptyspace" style="width:100%; height:5px;"></div>`;
 }
 function CleanMenu() {
   document.getElementById('sidemenu').innerHTML = `<div id="closeSidemenuBtn" class="menubtn" onclick="sidemenu(false);"  style="background:linear-gradient(to left,rgba(0,0,0,0.5),rgba(0,0,0,0)); display: flex; justify-content:center; align-items:center; width:100%; height:52px;">
@@ -162,7 +162,7 @@ function CleanMenu() {
 <div id="sidemenu_대시보드" class="sideTabBtns" onclick="changeScene(0);">
   대시보드
 </div>
-<div id="sidemenu_설정" class="sideTabBtns" style="position: absolute; bottom:0px" onclick="changeScene(100);">
+<div id="sidemenu_설정" class="sideTabBtns" onclick="changeScene(100);">
       설정
     </div>`;
 }
