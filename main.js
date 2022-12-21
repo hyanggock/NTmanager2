@@ -98,7 +98,7 @@ window.changeScene = function (scene) {
         var len = Object.keys(snapData.val()).length;
         CleanCells();
         for (var i = 1; i <= len; i++) {
-          var tempinfo = snapData.chilFd(i + '/info').val().toString();
+          var tempinfo = snapData.child(i + '/info').val().toString();
           var tempstatus = snapData.child(i + '/notebookstatus').val().toString();
           makecell(notebooknames[scene], i, tempstatus, tempinfo);
         }
