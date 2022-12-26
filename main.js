@@ -1,4 +1,4 @@
-
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.1.1/firebase-auth.js";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.1/firebase-app.js";
 import { getDatabase, ref, child, set, get, onValue, update } from "https://www.gstatic.com/firebasejs/9.1.1/firebase-database.js";
 
@@ -13,7 +13,8 @@ const firebaseConfig = {
   measurementId: "G-0TEJYZKVQ1"
 };
 
-const app = initializeApp(firebaseConfig);
+var app;
+var auth;
 var before_scene = 0;
 var notebooknames = [];
 var menuname = [];
@@ -21,16 +22,27 @@ var menulen = 0;
 var menuloadrequest = true;
 menuname[0] = '대시보드';
 menuname[100] = '설정';
-var database = getDatabase(app);
+var database;
 var currentMenu = 0;
-const notebookdata = ref(database, "/Notebooks");
+var notebookdata;
 Initialize();
 
 function Initialize() {
-  onValue((notebookdata), (snapData) => {
-    menulen = Object.keys(snapData.val()).length;
-    getmenu(snapData);
-  });
+  try {
+    app = initializeApp(firebaseConfig);
+    auth = getAuth();
+    database = getDatabase(app);
+    notebookdata = ref(database, "/Notebooks");
+    onValue((notebookdata), (snapData) => {
+      menulen = Object.keys(snapData.val()).length;
+      getmenu(snapData);
+    });
+  }
+  catch(e) {
+    console.log(e);
+    document.getElementById('loadingtext').innerHTML = "<br>연결 오류. 재시도중...";
+    setTimeout(Initialize(), 5000);
+  }
 }
 function wait(sec) {
   let start = Date.now(), now = start;
