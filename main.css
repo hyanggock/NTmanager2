@@ -73,6 +73,10 @@ body {
   animation-name: transparentslide;
 }
 
+.settingcontent{
+  width:100%;
+}
+
 .dashboard {
   display: flex;
   flex-wrap: wrap;
