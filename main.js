@@ -57,8 +57,7 @@ function getmenu(data) {
     makedashcell(notebooknames[i + 1], i + 1, standbynum, data.child(notebooknames[i + 1]).val().length);
   }
   document.getElementById("total").innerHTML = totalStandby;
-  if (document.getElementById("loadingpanel").style.display != 'none') {
-    $('.loadingpanel').css('-webkit-animation-name', 'transparent');
+  if (document.getElementById("loadingtext").innerHTML != "<br>완료") {
     $('.openingpanel').css('-webkit-animation-name', 'translatetoupside');
     $('.openingloading').css('-webkit-animation-name', 'transparent');
     $('.openingtext').css('-webkit-animation-name', 'translatetodownsidelittle');
@@ -107,9 +106,6 @@ window.changeScene = function (scene) {
           void document.getElementById('cell_area').offsetWidth;
           document.getElementById('cell_area').classList.add("cell_area");
         }
-        if (document.getElementById("loadingpanel").style.display != 'none') {
-          $('.loadingpanel').css('-webkit-animation-name', 'transparent');
-        }
 
         before_scene = scene;
       });
@@ -155,7 +151,7 @@ function CleanCells() {
   document.getElementById('cell_area').innerHTML = `<div id="emptyspace" style="width:100%; height:5px;"></div>`;
 }
 function CleanMenu() {
-  document.getElementById('sidemenu').innerHTML = `<div id="closeSidemenuBtn" class="menubtn" onclick="sidemenu(false);"  style="background:linear-gradient(to left,rgba(0,0,0,0.5),rgba(0,0,0,0)); display: flex; justify-content:center; align-items:center; width:100%; height:52px;">
+  document.getElementById('sidemenu').innerHTML = `<div id="closeSidemenuBtn" class="menubtn" onclick="sidemenu(false);"  style="background-color: rgba(200, 200, 200, 0.9); display: flex; justify-content:center; align-items:center; width:100%; height:52px;">
   <img src="https://cdn-icons-png.flaticon.com/512/8928/8928337.png" width="40px" height="40px" style="position: absolute; left: 0px;">
     <h2>노트북 재고관리</h2>
 </div>
