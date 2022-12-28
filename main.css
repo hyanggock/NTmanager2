@@ -10,7 +10,7 @@ body {
 }
 
 .header {
-  height: 50px;
+  height: 40px;
   width: 100%;
   position: fixed;
   display: flex;
