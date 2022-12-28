@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="kr">
 <title>
   NTmanager
 </title>
@@ -41,21 +41,26 @@
     </div>
     <div id="menubtn" onclick="sidemenu(true);"
       style="text-align: center; height:50px; will-change:auto; width: 50px; display: flex; align-items: center; justify-content: center;position: absolute; left:0px; z-index: 900;">
-      <img class="menubtn" src="https://cdn-icons-png.flaticon.com/512/4543/4543046.png" alt="menuimg" width="40px"
-        height="40px">
+      <img class="menubtn" src="https://cdn-icons-png.flaticon.com/512/4543/4543046.png" alt="menuimg" width="30px"
+        height="30px">
+    </div>
+    <div id="menubtn" onclick="changeScene(0);"
+      style="text-align: center; height:50px; will-change:auto; width: 50px; display: flex; align-items: center; justify-content: center;position: absolute; left:40px; z-index: 900;">
+      <img class="menubtn" src="https://cdn-icons-png.flaticon.com/512/20/20176.png" alt="homeimg" width="25px"
+        height="25px">
     </div>
     <div id="connectingimage" class="connection"
       style="height: 50px; align-items: cemter; opacity: 0.001; justify-content: center; width:50px; visibility: visible; position:absolute; right:0px;">
       <video src="https://cdn-icons-mp4.flaticon.com/512/6172/6172518.mp4" autoplay="autoplay"
-        loop="loop" type="video/mp4" alt="connectimg" mute="muted" width="50px" height="50px">
+        loop="loop" type="video/mp4" alt="connectimg" mute="muted" width="40px" height="40px">
     </div>
   </div>
   <div id="sidemenu" class="sidemenu">
     <div id="closeSidemenuBtn" class="menubtn" onclick="sidemenu(false);"
       style="background:linear-gradient(to left,rgba(0,0,0,0.5),rgba(0,0,0,0)); display: flex; justify-content:center; align-items:center; width:100%; height:52px;">
-      <img src="https://cdn-icons-png.flaticon.com/512/8928/8928337.png" width="40px" height="40px"
-        style="position: absolute; left: 0px;">
-      <h2>노트북 재고관리</h2>
+      <img src="https://cdn-icons-png.flaticon.com/512/8928/8928337.png" alt="menubtn" width="30px" height="30px"
+        style="position: absolute; left: 10px;">
+      <h2>NT manager</h2>
     </div>
     <div id="sidemenu_대시보드" class="sideTabBtns" onclick="changeScene(0)">
       대시보드
@@ -64,7 +69,7 @@
       설정
     </div>
   </div>
-  <div id="emptyspace" style="width:100%; height:50px;"></div>
+  <div id="emptyspace" style="width:100%; height:40px;"></div>
   <div id="settingPanel" class="settingPanel">
     <div id="emptyspace" style="width:100%; height:10px;">
 
