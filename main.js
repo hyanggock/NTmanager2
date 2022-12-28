@@ -38,7 +38,7 @@ function Initialize() {
       getmenu(snapData);
     });
   }
-  catch(e) {
+  catch (e) {
     console.log(e);
     document.getElementById('loadingtext').innerHTML = "<br>연결 오류. 재시도중...";
     setTimeout(Initialize(), 5000);
@@ -94,6 +94,7 @@ window.changeScene = function (scene) {
     if (document.getElementById("dashboard").style.display != 'none') {
       $('.dashboard').css('-webkit-animation-name', 'transparentslide');
     }
+    $(".header").css("top", "0px");
   }
   else if (scene == 100) {
     document.getElementById('cell_area').style.display = 'none';
@@ -163,9 +164,9 @@ function CleanCells() {
   document.getElementById('cell_area').innerHTML = `<div id="emptyspace" style="width:100%; height:5px;"></div>`;
 }
 function CleanMenu() {
-  document.getElementById('sidemenu').innerHTML = `<div id="closeSidemenuBtn" class="menubtn" onclick="sidemenu(false);"  style="background-color: rgba(200, 200, 200, 0.9); display: flex; justify-content:center; align-items:center; width:100%; height:52px;">
-  <img src="https://cdn-icons-png.flaticon.com/512/8928/8928337.png" width="40px" height="40px" style="position: absolute; left: 0px;">
-    <h2>노트북 재고관리</h2>
+  document.getElementById('sidemenu').innerHTML = `<div id="closeSidemenuBtn" class="menubtn" onclick="sidemenu(false);"  style="background-color: rgba(200, 200, 200, 0.9); display: flex; justify-content:center; align-items:center; width:100%; height:42px;">
+  <img src="https://cdn-icons-png.flaticon.com/512/8928/8928337.png" width="30px" height="30px" style="position: absolute; left: 10px;">
+    <h2>NT manager</h2>
 </div>
 <div id="sidemenu_대시보드" class="sideTabBtns" onclick="changeScene(0);">
   대시보드
@@ -238,14 +239,16 @@ function makedashcell(type, num, available, total) {
 
 var lastScrollTop = 0;
 $(window).scroll(function () {
-  var scrollTop = $(this).scrollTop();
-  if (scrollTop >= 10) {
-    if ((scrollTop > lastScrollTop) && (lastScrollTop > 0)) {
-      $(".header").css("top", "-100px");
-    } else {
-      $(".header").css("top", "0px");
+  if (currentMenu != 0) {
+    var scrollTop = $(this).scrollTop();
+    if (scrollTop >= 10) {
+      if ((scrollTop > lastScrollTop) && (lastScrollTop > 0)) {
+        $(".header").css("top", "-100px");
+      } else {
+        $(".header").css("top", "0px");
+      }
+      lastScrollTop = scrollTop;
     }
-    lastScrollTop = scrollTop;
   }
 })
 $('html').click(function (e) {
