@@ -203,6 +203,9 @@ function makecell(type, number, status, info) {
     temptext = String(temptext).padStart(4, '0');
     temptext = '-' + temptext;
   }
+  if (type.includes('교육18')) {
+    temptext = String(temptext).padStart(2, '0');
+  }
 
   document.getElementById('cell_area').innerHTML += '<div class="notecell" id="cell_' + type + '_' + number + '"> ' +
     '<div class="devicenumber"' + 'id="devicenum_' + number + '">' + type + temptext + '</div>' +
