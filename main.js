@@ -66,7 +66,7 @@ function getmenu(data) {
     }
     totalStandby += standbynum;
     makemenu(Object.keys(data.val())[i], i + 1);
-    makedashcell(notebooknames[i + 1], i + 1, standbynum, data.child(notebooknames[i + 1]).val().length);
+    makedashcell(notebooknames[i + 1], i + 1, standbynum, data.child(notebooknames[i + 1]).val().length-1);
   }
   document.getElementById("total").innerHTML = totalStandby;
   if (document.getElementById("loadingtext").innerHTML != "<br>완료") {
