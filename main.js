@@ -271,5 +271,5 @@ window.sidemenu = function (input) {
   else {
     $('.sidemenu').css('-webkit-animation-name', 'open');
     sidemenuAnimationStatus = 'open';
-  }
+  } 
 }
