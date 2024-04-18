@@ -199,11 +199,25 @@ function makecell(type, number, status, info) {
   statusStyle[6] = 'background-color:white';
   var temptext = number;
 
-  if (type.includes('NB')) {
+  if (type.includes('NB21')) {
+    temptext = String(temptext).padStart(4, '0');
+    temptext = '-' + temptext;
+  }
+  if (type.includes('NB22')) {
+    temptext = String(temptext).padStart(4, '0');
+    temptext = '-' + temptext;
+  }
+  if (type.includes('NB23')) {
     temptext = String(temptext).padStart(4, '0');
     temptext = '-' + temptext;
   }
   if (type.includes('교육18')) {
+    temptext = String(temptext).padStart(2, '0');
+  }
+  if (type.includes('지식정보')) {
+    temptext = String(temptext).padStart(2, '0');
+  }
+  if (type.includes('교육재정')) {
     temptext = String(temptext).padStart(2, '0');
   }
   if (type.includes('NB13')) {
