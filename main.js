@@ -112,7 +112,7 @@ window.changeScene = function (scene) {
         for (var i = 1; i <= len; i++) {
           var tempinfo = snapData.child(i + '/info').val().toString();
           var tempstatus = snapData.child(i + '/notebookstatus').val().toString();
-          var tempnum = snapData.chile(i).val().toString();
+          var tempnum = snapData.child(i).val().toString();
           makecell(notebooknames[scene], tempnum, tempstatus, tempinfo);
         }
         if (before_scene != scene) {
